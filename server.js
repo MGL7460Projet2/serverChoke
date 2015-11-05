@@ -1,5 +1,5 @@
 var express = require('express');
-
+var facebook = require('passport-facebook');
 var app = express();
 
 app.get('/', function(req, res){
