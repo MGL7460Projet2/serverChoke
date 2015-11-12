@@ -4,11 +4,14 @@ var express = require('express');
 var router = express.Router();
 
 // Models
-var Evenements = require('../models/evenement');
+var Events = require('../models/event');
+var Chokes = require('../models/choke');
 
 // Routes
-Evenements.methods(['get', 'put', 'post', 'delete']);
-Evenements.register(router, '/evenements');
+Events.methods(['get', 'put', 'post', 'delete']);
+Events.register(router, '/events');
+Chokes.methods(['get', 'put', 'post', 'delete']);
+Chokes.register(router, '/chokes');
 
 // Return router
 module.exports = router;
