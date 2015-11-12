@@ -1,14 +1,20 @@
+
+// Dependencies
 var express = require('express');
-var facebook = require('passport-facebook');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+
+// MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/rest_test');
+
+// Express
 var app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/', function(req, res){
-  res.json({
-    x : 1,
-    y : 2
-  });
-});
+// Routes
+app.use('/api', require('./routes/api'));
 
-app.listen(3000, function(){
-  console.log("Listening on port 3000");
-});
+// Start server
+app.listen(3000);
+console.log('API is running on port 3000');
