@@ -5,9 +5,9 @@ var mongoose = restful.mongoose;
 
 // Schema
 var eventSchema = new mongoose.Schema({
-    titre: String,
-    sku: String,
-    id: Number
+    name: String,
+    face: String,
+    lastText: String
 });
 
 // Return model
