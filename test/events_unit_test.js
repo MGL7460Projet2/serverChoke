@@ -13,8 +13,8 @@ describe("Events unit test",function(){
 
     //calling Events api
     server
-    .post('/events')
-    .send({name : "fdf", face : "mkd", lastText : ""})
+    .get('/events')
+  //  .send({name : "fdf", face : "mkd", lastText : ""})
     .expect("Content-type",/json/)
     .expect(200)
     .end(function(err,res){
