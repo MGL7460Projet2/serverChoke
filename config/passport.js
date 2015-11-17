@@ -23,7 +23,7 @@ module.exports = function(passport){
     },
     function(accessToken, refreshToken, profile, done) {
       process.nextTick(function(){
-	    		User.findOne({'facebook.id': profile.id}, function(err, user){
+	    		User.findOne({'id': profile.id}, function(err, user){
 	    			if(err)
 	    				return done(err);
 	    			if(user)
@@ -35,7 +35,8 @@ module.exports = function(passport){
 	    				newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
 	    				newUser.email = profile.emails[0].value;
 
-              //console.log(newUser);
+              console.log(newUser);
+              console.log(accessToken, profile.id);
 
 
 	    				newUser.save(function(err){
