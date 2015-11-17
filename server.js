@@ -3,7 +3,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-
+var configAuth = require('./config/auth');
 // MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/rest_test');
 

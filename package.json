@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "watch": "nodemon -- server.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,11 @@
     "node-restful": "^0.2.2",
     "should": "^7.1.1",
     "supertest": "^1.1.0"
+  },
+  "devDependencies": {
+    "mongoose": "^4.2.5",
+    "node-restful": "^0.2.2",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.0.0"
   }
 }
