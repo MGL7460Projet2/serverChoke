@@ -13,3 +13,6 @@ Demo (Chokes): [http://node-js-143943.nitrousapp.com:3000/api/chokes](http://nod
 
 #### Run
 * node server.js
+
+#### Test
+* mocha
