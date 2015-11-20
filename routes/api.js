@@ -7,7 +7,7 @@ var path = require('path');
 var Wreck = require('wreck');
 var Ajax = require('simple-ajax');
 
-ajax.send();
+
 
 // Models
 var Events = require('../models/event');
@@ -89,7 +89,7 @@ router.post('/events/', function(req, res){
     ajax.on('success', function(event) {
         console.log('success', event);
     });
-    
+    ajax.send();
   });
 
 // Return router
