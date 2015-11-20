@@ -76,6 +76,7 @@ router.post('/events/', function(req, res){
     var sessionID = "10206500617488421";
     var token = "";
     User.findOne({'fbID': sessionID}, function(err, user){
+      console.log(user);
       token = user.token;
     });
     var data = {};
@@ -84,7 +85,15 @@ router.post('/events/', function(req, res){
     // Wreck.get(uri, function (err, res, payload) {
     //     console.log(res);
     // });
-    var ajax = new Ajax(uri);
+    var ajax = new Ajax(
+        {
+            url: uri,
+            method: 'GET',
+            headers: {
+                myCustomHeader: 'test'
+            }
+        }
+    );
 
     ajax.on('success', function(event) {
         console.log('success', event);
