@@ -52,7 +52,7 @@ router.post('/events/', function(req, res){
   //Here, we need a session. It's EXTREMELY important !
   router.get('/myEvents', function(req, res){
     sessionID = 10206500617488421; //TEMPORARY, WE NEED THAT SESSION SYSTEM (cookie?)
-    	User.findOne({'fbID': profile.id}, function(err, user){
+    	User.findOne({'fbID': sessionID}, function(err, user){
         if(err){
           console.log(err);
         }else if(user){
