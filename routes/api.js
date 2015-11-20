@@ -77,8 +77,8 @@ router.post('/events/', function(req, res){
     });
     var data = {};
     var uri = "https://graph.facebook.com/"+eventID+"?access_token="+token;
-    Wreck.get('https://google.com/', function (err, res, payload) {
-        console.log(payload);
+    Wreck.get(uri, function (err, res, payload) {
+        console.log(res);
     });
 
   });
