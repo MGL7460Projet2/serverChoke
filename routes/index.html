@@ -56,7 +56,11 @@
       if (response.authResponse) {
         accessToken = response.authResponse.accessToken;
         //Pour avoir la photo :
-        // https://graph.facebook.com/1484262851881130/picture?type=large&access_token=CAAPi6I5Eq7kBANdNeLlohwbc1DajklFgIo27EHYHrGpNe4CKBZBdm02iunydGM2ZBaDdorqDZBdDAmk2XfICmz5DFZAoO0ZAdhPjJIuS4j70YiKrtwZB8YcFSXauXYFCZA6bETqZAkBKKz32STl0FHTw10UB0UIgiGGr7rdNi9XMvrP7lW1JYBA2FRZCGVxrOWCjyKbZBnag2gnGmYPUDjEp2c
+        // https://graph.facebook.com/1484262851881130/picture?type=large&access_token=
+        // Pour avoir les users qui viennent :
+        // https://graph.facebook.com/1484262851881130/attending?access_token=
+        // Documentation :
+        // https://developers.facebook.com/docs/graph-api/reference/v2.5/event/attending/
         FB.api(
             "/10206500617488421/events?access_token="+accessToken,
             function (response) {

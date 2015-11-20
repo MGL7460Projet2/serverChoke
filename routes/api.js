@@ -17,6 +17,13 @@ Events.register(router, '/events');
 Chokes.methods(['get', 'put', 'post', 'delete']);
 Chokes.register(router, '/chokes');
 
+router.post('/events/', function(req, res){
+  var token = req.body.token;
+  var id = req.body.id;
+  //Call Facebook API
+
+});
+
   //Fail & Success
   router.get('/index', function(req, res){
     res.json({
