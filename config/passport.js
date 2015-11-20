@@ -48,7 +48,7 @@ module.exports = function(passport){
             }else if(user){
               // We change the user events with the new ones.
               var events = [];
-              console.log("User found, now we modify events", events);
+              console.log("User found, now we modify events", profile.events);
               for(i in profile.events){
                 events.push(profile.events[i]);
               }
