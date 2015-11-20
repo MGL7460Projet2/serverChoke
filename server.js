@@ -6,7 +6,8 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 
 // MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/rest_test');
+//mongoose.connect('mongodb://127.0.0.1:27017/rest_test');
+mongoose.connect('mongodb://admin:huehuehue@ds057204.mongolab.com:57204/heroku_sft663wc')
 
 // Express
 var app = express();
