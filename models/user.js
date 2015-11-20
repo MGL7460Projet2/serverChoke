@@ -6,7 +6,8 @@ var userSchema = new mongoose.Schema({
     id: String,
     token: String,
     email: String,
-    name: String
+    name: String,
+    events : Array
 });
 
 // Return model

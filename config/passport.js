@@ -3,7 +3,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var configAuth = require('./auth');
 var User = require('../models/user');
 
-//Fonction récursive pour itérer dans l'objet retourné par l'API "Facebook Graph"
+//Fonction récursive pour écrire l'objet retourné par l'API "Facebook Graph". Utiliser pour débuguer
 var enumerate = function(object){
   for (var key in object) {
     if (object.hasOwnProperty(key)) {
@@ -38,30 +38,47 @@ module.exports = function(passport){
       profileFields: ['emails' , 'name', 'events']
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(accessToken, profile._json);
-      enumerate(profile._json);
-
+    //  console.log(accessToken, profile._json);
+    //  enumerate(profile._json);
+    console.log("Facebook Graph API called");
       process.nextTick(function(){
 	    		User.findOne({'id': profile.id}, function(err, user){
 	    			if(err){
               return done(err);
             }else if(user){
-              return done(null, user);
+              // We change the user events with the new ones.
+              var events = [];
+              for(i in profile.events){
+                events.push(profile.events[i]);
+              }
+              user.events = events;
+              user.save(function(err){
+                if(err){
+                  throw err;
+                }else{
+                  return done(null, user);
+                }
+              });
             }else {
 	    				var newUser = new User();
 	    				newUser.id = profile.id;
 	    				newUser.token = accessToken;
 	    				newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
 	    				newUser.email = profile.emails[0].value;
+              var events = [];
+              for(i in profile.events){
+                //Here, construct the events with the useful informations. For now, we just push the whole lot
+                events.push(profile.events[i]);
+              }
+              newUser.email = events;
 
-              console.log(newUser);
+              console.log("New user : "+ newUser);
 
 	    				newUser.save(function(err){
 	    					if(err)
 	    						throw err;
 	    					return done(null, newUser);
 	    				})
-
 	    				//console.log(profile);
 	    			}
 	    		});
