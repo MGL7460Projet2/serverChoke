@@ -73,7 +73,7 @@ module.exports = function(passport){
               }
               newUser.events = events;
 
-              console.log("New user : --- "+ newUser.name + " --- " + newUser.email + " --- " + newUser.fbID);
+              console.log("New user : --- " + newUser.name + " --- " + newUser.email + " --- " + newUser.fbID);
 
 	    				newUser.save(function(err){
 	    					if(err)

@@ -48,5 +48,24 @@ router.post('/events/', function(req, res){
     res.sendFile(path.join(__dirname + '/index.html'));
   });
 
+  //Data handling for user
+  //Here, we need a session. It's EXTREMELY important !
+  router.get('/myEvents', function(req, res){
+    sessionID = 10206500617488421; //TEMPORARY, WE NEED THAT SESSION SYSTEM (cookie?)
+    	User.findOne({'fbID': profile.id}, function(err, user){
+        if(err){
+          console.log(err);
+        }else if(user){
+          res.json({
+            events : user.events;
+          });
+        }else{
+          res.json({
+            err : "No profile found"
+          });
+        }
+      }
+  });
+
 // Return router
 module.exports = router;
