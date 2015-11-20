@@ -81,7 +81,7 @@ router.post('/events/', function(req, res){
 
       // GET Request in native JavaScript
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', encodeURI(uri);
+      xhr.open('GET', encodeURI(uri));
       xhr.onload = function() {
           if (xhr.status === 200) {
               console.log(xhr.responseText);
