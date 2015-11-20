@@ -48,7 +48,7 @@ module.exports = function(passport){
             }else if(user){
               // We change the user events with the new ones.
               var events = [];
-              console.log("User found, now we modify events", profile._json.events);
+              console.log("User found, now we modify events");
               for(i in profile._json.events){
                 events.push(profile._json.events[i]);
               }
@@ -73,7 +73,7 @@ module.exports = function(passport){
               }
               newUser.events = events;
 
-              console.log("New user : "+ newUser);
+              console.log("New user : --- "+ newUser.name + " --- " + newUser.email + " --- " + newUser.fbID);
 
 	    				newUser.save(function(err){
 	    					if(err)
