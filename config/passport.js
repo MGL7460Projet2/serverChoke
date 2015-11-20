@@ -48,9 +48,9 @@ module.exports = function(passport){
             }else if(user){
               // We change the user events with the new ones.
               var events = [];
-              console.log("User found, now we modify events", profile.events);
-              for(i in profile.events){
-                events.push(profile.events[i]);
+              console.log("User found, now we modify events", profile._json.events);
+              for(i in profile._json.events){
+                events.push(profile._json.events[i]);
               }
               user.events = events;
               user.save(function(err){
@@ -69,7 +69,7 @@ module.exports = function(passport){
               var events = [];
               for(i in profile.events){
                 //Here, construct the events with the useful informations. For now, we just push the whole lot
-                events.push(profile.events[i]);
+                events.push(profile._json.events[i]);
               }
               newUser.email = events;
 
