@@ -72,7 +72,7 @@ router.post('/events/', function(req, res){
   });
 
   // Gives all infos about an event
-  router.get('event/:id', function(req, res){
+  router.get('/event/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -96,7 +96,7 @@ router.post('/events/', function(req, res){
   });
 
   //Give all attendingUsers on the event corresponding to the ID in URL
-  router.get('event/attendingUsers/:id', function(req, res){
+  router.get('/event/attending/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -120,7 +120,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives all user who denied the Event
-  router.get('event/declined/:id', function(req, res){
+  router.get('/event/declined/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -144,7 +144,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives all user who said maybe to the Event
-  router.get('event/maybe/:id', function(req, res){
+  router.get('/event/maybe/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -168,7 +168,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives all user who didn't respond to the Event
-  router.get('event/noreply/:id', function(req, res){
+  router.get('/event/noreply/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -192,7 +192,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives all user who didn't respond to the Event
-  router.get('event/interested/:id', function(req, res){
+  router.get('/event/interested/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -216,7 +216,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives the picture of the Event
-  router.get('event/picture/:id', function(req, res){
+  router.get('/event/picture/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -240,7 +240,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives the photos published on the Event
-  router.get('event/photos/:id', function(req, res){
+  router.get('/event/photos/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -264,7 +264,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives the videos published on the Event
-  router.get('event/videos/:id', function(req, res){
+  router.get('/event/videos/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -288,7 +288,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives the roles on the Event's staff
-  router.get('event/roles/:id', function(req, res){
+  router.get('/event/roles/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
@@ -312,7 +312,7 @@ router.post('/events/', function(req, res){
   });
 
   //Gives all admins of the event
-  router.get('event/admins/:id', function(req, res){
+  router.get('/event/admins/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
     User.findOne({'fbID': sessionID}, function(err, user){
