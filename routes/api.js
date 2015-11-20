@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var path = require('path');
+var Wreck = require('wreck');
 
 // Models
 var Events = require('../models/event');
@@ -65,6 +66,21 @@ router.post('/events/', function(req, res){
           });
         }
       });
+  });
+
+  router.get('/attendingUsers:id', function(req, res){
+    var eventID = req.params.id;
+    var sessionID = "10206500617488421";
+    var token = "";
+    User.findOne({'fbID': sessionID}, function(err, user){
+      token = user.token;
+    };
+    var data = {};
+    var uri = "https://graph.facebook.com/"+eventID+"?access_token="+token;
+    Wreck.get('https://google.com/', function (err, res, payload) {
+        console.log(payload);
+    });
+
   });
 
 // Return router

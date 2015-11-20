@@ -29,7 +29,8 @@
     "passport-facebook": "^2.0.0",
     "path": "^0.12.7",
     "should": "^7.1.1",
-    "supertest": "^1.1.0"
+    "supertest": "^1.1.0",
+    "wreck": "^7.0.0"
   },
   "devDependencies": {
     "mongoose": "^4.2.5",

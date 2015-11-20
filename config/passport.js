@@ -53,6 +53,7 @@ module.exports = function(passport){
                 events.push(profile._json.events[i]);
               }
               user.events = events;
+              user.token = accessToken; //New token in case it changed
               user.save(function(err){
                 if(err){
                   throw err;
