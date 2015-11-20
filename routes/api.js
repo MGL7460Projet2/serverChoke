@@ -57,7 +57,7 @@ router.post('/events/', function(req, res){
           console.log(err);
         }else if(user){
           res.json({
-            events : user.events;
+            events : user.events
           });
         }else{
           res.json({
