@@ -38,7 +38,7 @@ router.post('/events/', function(req, res){
   })
 
   //Passport
-  router.get('/auth/facebook', passport.authenticate('facebook', {scope : ['email'] } ));
+  router.get('/auth/facebook', passport.authenticate('facebook', {scope : ['email', 'user_events'] } ));
 
   router.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/api/index',
