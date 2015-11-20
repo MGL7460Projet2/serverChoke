@@ -78,25 +78,20 @@ router.post('/events/', function(req, res){
       console.log(user.token);
       var uri = "https://graph.facebook.com/"+eventID+"?access_token="+user.token;
       console.log(uri);
-      // Wreck.get(uri, function (err, res, payload) {
-      //     console.log(res);
-      // });
-      var ajax = new Ajax(
-          {
-              url: uri,
-              method: 'GET',
-              headers: {
-                  myCustomHeader: 'test'
-              }
+
+      // GET Request in native JavaScript
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', encodeURI(uri);
+      xhr.onload = function() {
+          if (xhr.status === 200) {
+              console.log(xhr.responseText);
+              res.json(xhr.responseText);
           }
-      );
-
-      ajax.on('success', function(event) {
-          console.log('success', event);
-          res.json(event);
-      });
-
-      ajax.send();
+          else {
+              console.log('Request failed.  Returned status of ' + xhr.status);
+          }
+      };
+      xhr.send();
     });
   });
 
