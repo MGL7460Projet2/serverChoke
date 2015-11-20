@@ -64,7 +64,7 @@ router.post('/events/', function(req, res){
             err : "No profile found"
           });
         }
-      }
+      });
   });
 
 // Return router
