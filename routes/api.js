@@ -3,7 +3,6 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var Facebook = require('facebook-node-sdk');
 var path = require('path');
 
 // Models
