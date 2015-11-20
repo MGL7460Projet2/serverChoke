@@ -5,6 +5,9 @@ var router = express.Router();
 var passport = require('passport');
 var path = require('path');
 var Wreck = require('wreck');
+var Ajax = require('simple-ajax');
+
+ajax.send();
 
 // Models
 var Events = require('../models/event');
@@ -77,10 +80,16 @@ router.post('/events/', function(req, res){
     });
     var data = {};
     var uri = "https://graph.facebook.com/"+eventID+"?access_token="+token;
-    Wreck.get(uri, function (err, res, payload) {
-        console.log(res);
-    });
+    console.log(uri);
+    // Wreck.get(uri, function (err, res, payload) {
+    //     console.log(res);
+    // });
+    var ajax = new Ajax(uri);
 
+    ajax.on('success', function(event) {
+        console.log('success', event);
+    });
+    
   });
 
 // Return router
