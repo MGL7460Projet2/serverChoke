@@ -42,12 +42,13 @@ module.exports = function(passport){
     //  enumerate(profile._json);
     console.log("Facebook Graph API called");
       process.nextTick(function(){
-	    		User.findOne({'id': profile.id}, function(err, user){
+	    		User.findOne({'fbID': profile.id}, function(err, user){
 	    			if(err){
               return done(err);
             }else if(user){
               // We change the user events with the new ones.
               var events = [];
+              console.log("User found, now we modify events", events);
               for(i in profile.events){
                 events.push(profile.events[i]);
               }
@@ -61,7 +62,7 @@ module.exports = function(passport){
               });
             }else {
 	    				var newUser = new User();
-	    				newUser.id = profile.id;
+	    				newUser.fbID = profile.id;
 	    				newUser.token = accessToken;
 	    				newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
 	    				newUser.email = profile.emails[0].value;
