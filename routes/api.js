@@ -74,7 +74,7 @@ router.post('/events/', function(req, res){
     var token = "";
     User.findOne({'fbID': sessionID}, function(err, user){
       token = user.token;
-    };
+    });
     var data = {};
     var uri = "https://graph.facebook.com/"+eventID+"?access_token="+token;
     Wreck.get('https://google.com/', function (err, res, payload) {
