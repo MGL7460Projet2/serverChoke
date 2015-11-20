@@ -71,34 +71,33 @@ router.post('/events/', function(req, res){
       });
   });
 
-  router.get('/attendingUsers:id', function(req, res){
+  router.get('/attendingUsers/:id', function(req, res){
     var eventID = req.params.id;
     var sessionID = "10206500617488421";
-    var token = "";
     User.findOne({'fbID': sessionID}, function(err, user){
-      console.log(user);
-      token = user.token;
-    });
-    var data = {};
-    var uri = "https://graph.facebook.com/"+eventID+"?access_token="+token;
-    console.log(uri);
-    // Wreck.get(uri, function (err, res, payload) {
-    //     console.log(res);
-    // });
-    var ajax = new Ajax(
-        {
-            url: uri,
-            method: 'GET',
-            headers: {
-                myCustomHeader: 'test'
-            }
-        }
-    );
+      console.log(user.token);
+      var uri = "https://graph.facebook.com/"+eventID+"?access_token="+user.token;
+      console.log(uri);
+      // Wreck.get(uri, function (err, res, payload) {
+      //     console.log(res);
+      // });
+      var ajax = new Ajax(
+          {
+              url: uri,
+              method: 'GET',
+              headers: {
+                  myCustomHeader: 'test'
+              }
+          }
+      );
 
-    ajax.on('success', function(event) {
-        console.log('success', event);
+      ajax.on('success', function(event) {
+          console.log('success', event);
+          res.json(event);
+      });
+
+      ajax.send();
     });
-    ajax.send();
   });
 
 // Return router
