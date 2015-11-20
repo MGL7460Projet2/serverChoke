@@ -67,11 +67,11 @@ module.exports = function(passport){
 	    				newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
 	    				newUser.email = profile.emails[0].value;
               var events = [];
-              for(i in profile.events){
+              for(i in profile._json.events){
                 //Here, construct the events with the useful informations. For now, we just push the whole lot
                 events.push(profile._json.events[i]);
               }
-              newUser.email = events;
+              newUser.events = events;
 
               console.log("New user : "+ newUser);
 
