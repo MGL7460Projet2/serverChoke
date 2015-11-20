@@ -31,7 +31,8 @@
     "should": "^7.1.1",
     "simple-ajax": "^2.3.1",
     "supertest": "^1.1.0",
-    "wreck": "^7.0.0"
+    "wreck": "^7.0.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "mongoose": "^4.2.5",

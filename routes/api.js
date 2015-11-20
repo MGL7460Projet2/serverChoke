@@ -6,7 +6,7 @@ var passport = require('passport');
 var path = require('path');
 var Wreck = require('wreck');
 var Ajax = require('simple-ajax');
-
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
 // Models
