@@ -43,8 +43,9 @@ router.post('/events/', function(req, res){
   //Passport
   router.get('/auth/facebook', passport.authenticate('facebook', {scope : ['email', 'user_events'] } ));
 
+  // Here we deal with redirections. If it's a success, need to go to the dashboard route. Else, on the login with fail message.
   router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { successRedirect: '/api/index',
+    passport.authenticate('facebook', { successRedirect: '/api/myEvents',
                                         failureRedirect: '/api/fail' }));
 
   //Facebook SDK
