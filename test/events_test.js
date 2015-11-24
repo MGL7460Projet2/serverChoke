@@ -9,7 +9,7 @@ it('should return a 200 response', function(done) {
    api.get('/api/events')
    .set('Accept', 'application/json')
    .expect(200,done)
-});   
+});
 
 
 it('should be an object with keys and values', function(done) {
@@ -25,7 +25,7 @@ it('should be an object with keys and values', function(done) {
 	  expect(res.body.lastText).to.not.equal(null);
 	  done();
 	});
-});	
+});
 
 it('should create a new event', function(done) {
    api.post('/api/events')
@@ -37,7 +37,7 @@ it('should create a new event', function(done) {
 	  //res.should.have.status(400);
 	  done();
    });
-});  
+});
 
 
 
@@ -66,4 +66,3 @@ it('should respond 200',function(done){
 
 
 });
-

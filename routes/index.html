@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook API Events</title>
+</head>
+<body>
+<h1>Yop</h1>
+<div id="eventInfo">
+
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1093913377287097',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+    // curl -i -X GET \
+ // "https://graph.facebook.com/v2.5/443051789153510/?access_token=1093913377287097%7CiBaysc9V5ZarRSFEhAq7odFzrPU"
+    var accessToken = '';
+    // FB.getLoginStatus(function (response) {
+    //   console.log(response);
+    //     if (response.authResponse) {
+    //         console.log(response.authResponse.accessToken);
+    //         accessToken = response.authResponse.accessToken;
+    //         FB.api(
+    //             "/1059619640/events?access_token="+accessToken,
+    //             function (response) {
+    //               if (response && !response.error) {
+    //                 /* handle the result */
+    //                 console.log("API successfully Called");
+    //                 console.log(response);
+    //                 for (var key in response) {
+    //                   if (response.hasOwnProperty(key)) {
+    //                     document.getElementById('eventInfo').innerHTML += '<div><h1>'+key + " : </h1> <p>" + response[key] +'</p></div>';
+    //                   }
+    //                 }
+    //
+    //               }else if(response.error){
+    //                 console.log(response.error);
+    //               }else{
+    //                 console.log("Bah... Pas trouvé...");
+    //               }
+    //             }
+    //         );
+    //
+    //     } else {
+    //         // do something...maybe show a login prompt
+    //     }
+    // },{scope: 'user_events'});
+
+    FB.login(function(response) {
+      // handle the response
+      console.log(response);
+      if (response.authResponse) {
+        accessToken = response.authResponse.accessToken;
+        //Pour avoir la photo :
+        // https://graph.facebook.com/1484262851881130/picture?type=large&access_token=
+        // Pour avoir les users qui viennent :
+        // https://graph.facebook.com/1484262851881130/attending?access_token=
+        // Documentation :
+        // https://developers.facebook.com/docs/graph-api/reference/v2.5/event/attending/
+        // App token for public infos calls : 1093913377287097|iBaysc9V5ZarRSFEhAq7odFzrPU
+        FB.api(
+            "/10206500617488421/events?access_token="+accessToken,
+            function (response) {
+              if (response && !response.error) {
+                /* handle the result */
+                console.log("API successfully Called");
+                console.log(response);
+                for (var key in response) {
+                  if (response.hasOwnProperty(key)) {
+                    document.getElementById('eventInfo').innerHTML += '<div><h1>'+key + " : </h1> </div>";
+                    for (var key2 in response[key]) {
+                      document.getElementById('eventInfo').innerHTML += '<div><h2> ---- Event '+key2 + " : </h2> </div>";
+                      for (var key3 in response[key][key2]) {
+                        document.getElementById('eventInfo').innerHTML += '<div><h3> ----------- '+key3 + " : </h3>"+response[key][key2][key3]+" </div>";
+                      }
+                    }
+                  }
+                }
+                if(response.paging.next){
+                  FB.api(""+response.paging.next, function(response2){
+                    console.log("Next call done");
+                    console.log(response2)
+                  });
+                }
+              }else if(response.error){
+                console.log(response.error);
+              }else{
+                console.log("Bah... Pas trouvé...");
+              }
+            }
+        );
+      }
+    }, {scope: 'email,user_likes,user_events', return_scopes: true});
+
+//CAAPi6I5Eq7kBAMHR6eZCZA1giEO719KvSYfdyZCJ0QE0J7RAqp7GfRhFbLT5ucWs0kxFpNCZAFcAQ7x2ZB5qSof1Siwee4F9nYH9Yhy8792expMB8GmoIAdPg8V7zptmY1b2ZB5u9Skyez9ItZBdCP8Jzld7ZBRQP74YQzXhaYMdYretbcaqVYXm
+
+
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+
+</script>
+
+</body>
+</html>
