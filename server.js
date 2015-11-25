@@ -21,12 +21,7 @@ var corsOptions = {
   origin: 'http://localhost:8100/'
 };
 app.use(cors(corsOptions));
-//Cross origins for dynamic gets & posts
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
 
 //Passport
 require('./config/passport')(passport);

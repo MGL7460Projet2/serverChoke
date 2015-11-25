@@ -21,6 +21,14 @@ Events.register(router, '/events');
 Chokes.methods(['get', 'put', 'post', 'delete']);
 Chokes.register(router, '/chokes');
 
+//Cross origins for dynamic gets & posts middleware
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 router.post('/events/', function(req, res){
   var token = req.body.token;
   var id = req.body.id;
