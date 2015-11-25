@@ -154,8 +154,8 @@ router.post('/events/', function(req, res){
 
 /*  **************  Data handling for user  ************** */
   //Here, we need a session. It's EXTREMELY important !
-  router.get('/myEvents', function(req, res){
-    sessionID = "10206500617488421"; //TEMPORARY, WE NEED THAT SESSION SYSTEM to get the user id & token (cookie?)
+  router.get('/myEvents/:id', function(req, res){
+    sessionID = req.params.id; //TEMPORARY, WE NEED THAT SESSION SYSTEM to get the user id & token (cookie?)
     	User.findOne({'fbID': sessionID}, function(err, user){
         if(err){
           console.log(err);
