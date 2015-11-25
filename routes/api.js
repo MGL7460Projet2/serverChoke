@@ -58,17 +58,22 @@ router.post('/events/', function(req, res){
     res.sendFile(path.join(__dirname + '/index.html'));
   });
 
-  // GETTING TOKEN & FACEBOOK ID FROM USER
-  router.post('/myinfos', function(req, res){
-    console.log("id: "+ req.body.id+" , token : "+ req.body.token);
+  router.get('/walou', function(req, res){
+    console.log(req.body.id);
+    res.send(res.body.id);
+  });
 
-    User.findOne({'fbID': req.body.id}, function(err, user){
+  // GETTING TOKEN & FACEBOOK ID FROM USER
+  router.get('/myinfos/:id/:token', function(req, res){
+    console.log("id: "+ req.params.id+" , token : "+ req.params.token);
+
+    User.findOne({'fbID': req.params.id}, function(err, user){
       if(err){
         return done(err);
       }else if(user){
         console.log("User found, now we modify credentials (token)");
         // GET Request in native JavaScript
-        var uri = "https://graph.facebook.com/"+req.body.id+"/events?access_token="+req.body.token;
+        var uri = "https://graph.facebook.com/"+req.params.id+"/events?access_token="+req.params.token;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(uri));
         xhr.onload = function() {
@@ -78,7 +83,7 @@ router.post('/events/', function(req, res){
                 for(i in data.data){
                   events.push(data.data[i]);
                 }
-                user.token = req.body.token; //Update the token, just in case it changed
+                user.token = req.params.token; //Update the token, just in case it changed
                 user.events = events;
                 user.save(function(err){
                   if(err){
@@ -97,7 +102,7 @@ router.post('/events/', function(req, res){
 
       }else {
         // GET Request in native JavaScript
-        var uri = "https://graph.facebook.com/"+req.body.id+"/events?access_token="+req.body.token;
+        var uri = "https://graph.facebook.com/"+req.params.id+"/events?access_token="+req.params.token;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(uri));
         xhr.onload = function() {
@@ -105,11 +110,13 @@ router.post('/events/', function(req, res){
                 var data = JSON.parse(xhr.responseText);
                 var events = [];
                 console.log(data);
-
+                for(i in data.data){
+                  events.push(data.data[i]);
+                }
                 // Creation of a new User
                 var newUser = new User();
-                newUser.fbID = req.body.id;
-                newUser.token = req.body.token;
+                newUser.fbID = req.params.id;
+                newUser.token = req.params.token;
                 newUser.events = events;
                 newUser.save(function(err){
                   if(err)
@@ -128,20 +135,19 @@ router.post('/events/', function(req, res){
     });
 
 
-    if(req.body.id && req.body.token){
+    if(req.params.id && req.params.token){
       res.header('Access-Control-Allow-Origin', '*');
       res.send({
         status : 200,
         received : true,
         body : {
-          text : "You just sent us : ",
-          body : req.body
+          text : "You just sent us your credential and you're now logged in "
         }
       });
     }else{
       res.send({
         received : false,
-        body : "You sent nothing"
+        body : "Missing credentials, you're not linked to Facebook"
       });
     }
   });
