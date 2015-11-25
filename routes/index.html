@@ -55,6 +55,7 @@
       console.log(response);
       if (response.authResponse) {
         accessToken = response.authResponse.accessToken;
+        userID = response.authResponse.userID;
         //Pour avoir la photo :
         // https://graph.facebook.com/1484262851881130/picture?type=large&access_token=
         // Pour avoir les users qui viennent :
@@ -86,6 +87,27 @@
                     console.log(response2)
                   });
                 }
+
+                // POST
+                console.log("Starting the POST of credentials");
+                var xhr = new XMLHttpRequest();
+                var url = "/api/myinfos";
+                var data = {
+                  token : accessToken,
+                  id : userID
+                };
+                var params = "id="+userID+"&token="+accessToken;
+                console.log(params);
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = function() {//Call a function when the state changes.
+                	if(xhr.readyState == 4 && xhr.status == 200) {
+                		console.log(JSON.parse(xhr.responseText));
+                	}
+                }
+                xhr.send(params);
+
               }else if(response.error){
                 console.log(response.error);
               }else{

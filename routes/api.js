@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var bodyParser = require('body-parser');
 var path = require('path');
 var Wreck = require('wreck');
 var Ajax = require('simple-ajax');
@@ -51,6 +52,93 @@ router.post('/events/', function(req, res){
   //Facebook SDK
   router.get('/facebook', function(req, res){
     res.sendFile(path.join(__dirname + '/index.html'));
+  });
+
+  // GETTING TOKEN & FACEBOOK ID FROM USER
+  router.post('/myinfos', function(req, res){
+    console.log("id: "+ req.body.id+" , token : "+ req.body.token);
+
+    User.findOne({'fbID': req.body.id}, function(err, user){
+      if(err){
+        return done(err);
+      }else if(user){
+        console.log("User found, now we modify credentials (token)");
+        // GET Request in native JavaScript
+        var uri = "https://graph.facebook.com/"+req.body.id+"/events?access_token="+req.body.token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', encodeURI(uri));
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var events = [];
+                for(i in data.data){
+                  events.push(data.data[i]);
+                }
+                user.token = req.body.token; //Update the token, just in case it changed
+                user.events = events;
+                user.save(function(err){
+                  if(err){
+                    throw err;
+                  }else{
+                    console.log("User modified successfully");
+
+                  }
+                });
+            }
+            else {
+                console.log('Request failed.  Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
+
+      }else {
+        // GET Request in native JavaScript
+        var uri = "https://graph.facebook.com/"+req.body.id+"/events?access_token="+req.body.token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', encodeURI(uri));
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var events = [];
+                console.log(data);
+
+                // Creation of a new User
+                var newUser = new User();
+                newUser.fbID = req.body.id;
+                newUser.token = req.body.token;
+                newUser.events = events;
+                newUser.save(function(err){
+                  if(err)
+                    throw err;
+                  return done(null, newUser);
+                });
+            }
+            else {
+                console.log('Request failed.  Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
+
+
+      }
+    });
+
+
+    if(req.body.id && req.body.token){
+      res.send({
+        status : 200,
+        received : true,
+        body : {
+          text : "You just sent us : ",
+          body : req.body
+        }
+      });
+    }else{
+      res.send({
+        received : false,
+        body : "You sent nothing"
+      });
+    }
   });
 
 /*  **************  Data handling for user  ************** */
