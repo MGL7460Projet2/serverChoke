@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var logger = require('./tools/logger');
+var cors = require('cors');
 
 // MongoDB
 //mongoose.connect('mongodb://127.0.0.1:27017/rest_test');
@@ -15,6 +16,7 @@ var app = express();
 app.use(logger);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors);
 
 //Passport
 require('./config/passport')(passport);
