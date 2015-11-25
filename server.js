@@ -16,12 +16,7 @@ var app = express();
 app.use(logger);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-var corsOptions = {
-  origin: 'http://localhost:8100/'
-};
-app.use(cors(corsOptions));
-
+app.use(cors());
 
 //Passport
 require('./config/passport')(passport);
