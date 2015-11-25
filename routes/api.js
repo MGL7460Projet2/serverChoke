@@ -8,7 +8,7 @@ var path = require('path');
 var Wreck = require('wreck');
 var Ajax = require('simple-ajax');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
+var cors = require('cors');
 
 // Models
 var Events = require('../models/event');
@@ -22,12 +22,7 @@ Chokes.methods(['get', 'put', 'post', 'delete']);
 Chokes.register(router, '/chokes');
 
 //Cross origins for dynamic gets & posts middleware
-router.post('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+router.use(cors());
 
 
 router.post('/events/', function(req, res){
@@ -134,6 +129,7 @@ router.post('/events/', function(req, res){
 
 
     if(req.body.id && req.body.token){
+      res.header('Access-Control-Allow-Origin', '*');
       res.send({
         status : 200,
         received : true,
