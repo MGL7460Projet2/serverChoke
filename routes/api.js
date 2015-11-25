@@ -22,7 +22,7 @@ Chokes.methods(['get', 'put', 'post', 'delete']);
 Chokes.register(router, '/chokes');
 
 //Cross origins for dynamic gets & posts middleware
-router.all('*', function(req, res, next) {
+router.post('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
