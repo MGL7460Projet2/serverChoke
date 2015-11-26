@@ -159,7 +159,7 @@ router.post('/events/', function(req, res){
     newChoke.fbSender = req.params.userID;
     newChoke.fbReceiver = req.params.id;
     newChoke.event = req.params.eventID;
-    newChoke.answer = false;
+    newChoke.answered = false;
 
     console.log(newChoke);
 
