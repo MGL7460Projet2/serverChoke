@@ -196,9 +196,9 @@ router.post('/events/', function(req, res){
   });
 
   //Give all attendingUsers on the event corresponding to the ID in URL
-  router.get('/event/attending/:id', function(req, res){
+  router.get('/event/attending/:id/:userid', function(req, res){
     var eventID = req.params.id;
-    var sessionID = "10206500617488421";
+    var sessionID = req.params.userid;
     User.findOne({'fbID': sessionID}, function(err, user){
       console.log(user.token);
       var uri = "https://graph.facebook.com/"+eventID+"/attending?access_token="+user.token;
