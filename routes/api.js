@@ -90,7 +90,6 @@ router.post('/events/', function(req, res){
                     throw err;
                   }else{
                     console.log("User modified successfully");
-
                   }
                 });
             }
@@ -165,9 +164,11 @@ router.post('/events/', function(req, res){
     console.log(newChoke);
 
     newChoke.save(function(err){
-      if(err)
+      if(err){
         throw err;
-      return done(null, newChoke);
+      }else{
+        console.log("Choke created successfully");
+      }
     });
   });
 
