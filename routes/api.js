@@ -198,7 +198,7 @@ router.post('/events/', function(req, res){
   });
 
   /* *************** Choke responding ************** */
-  router.get('/choke/respond/:chokeID:/:userID/, function(req, res){
+  router.get('/choke/respond/:chokeID:/:userID', function(req, res){
     var choke = {};
     var response = true;
 
