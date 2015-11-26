@@ -175,11 +175,14 @@ router.post('/events/', function(req, res){
   /* *************** Choke fetching **************** */
   router.get('/chokes/:id', function(req, res){
     var chokes = [];
-    Choke.find({ 'fbReceiver': req.params.id }, function (err, docs) {
+    var userID = req.params.id;
+    Choke.find({ 'fbReceiver':  userID }, function (err, docs) {
       // docs is an array
       console.log(docs);
-      Choke.find({'fbSender' : req.params.id},function(err, docs2){
+      Choke.find({'fbSender' : userID},function(err, docs2){
         //Push in Chokes the chokes the user received
+        console.log(docs2);
+
         for(i in docs){
           chokes.push(docs[i]);
         }
