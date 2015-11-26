@@ -168,6 +168,7 @@ router.post('/events/', function(req, res){
         throw err;
       }else{
         console.log("Choke created successfully");
+        res.send(newChoke);
       }
     });
   });
