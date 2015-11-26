@@ -200,12 +200,11 @@ router.post('/events/', function(req, res){
   /* *************** Choke responding ************** */
   router.get('/choke/respond/:chokeID:/:userID', function(req, res){
     var choke = {};
-    var response = true;
 
     Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
       choke = doc;
       console.log(choke);
-      choke.response = response;
+      choke.response = true;
       choke.save(function(err){
         if(err){
           throw err;
