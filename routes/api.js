@@ -179,22 +179,21 @@ router.post('/events/', function(req, res){
     Choke.find({ 'fbReceiver':  userID }, function (err, docs) {
       // docs is an array
       console.log(docs);
+      //Push in Chokes the chokes the user received
+      for(i in docs){
+        chokes.push(docs[i]);
+      }
       Choke.find({'fbSender' : userID},function(err, docs2){
-        //Push in Chokes the chokes the user received
-        console.log(docs2);
 
-        for(i in docs){
-          chokes.push(docs[i]);
-        }
+        console.log(docs2);
         //Push in Chokes the chokes the user sent
         for(i in docs2){
           chokes.push(docs2[i]);
         }
+        //Send the chokes
+        res.send(chokes);
       });
     });
-    //Send the chokes
-    console.log(chokes);
-    res.send(chokes);
   });
 
   /* *************** Choke responding ************** */
