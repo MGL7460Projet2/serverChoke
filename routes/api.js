@@ -152,6 +152,12 @@ router.post('/events/', function(req, res){
     }
   });
 
+  /* ************ Choke sending ************** */
+  router.get('/choke/:id/:userID', function(req, res){
+    console.log("User "+req.params.userID+" just choked User "+req.params.id);
+
+  });
+
 /*  **************  Data handling for user  ************** */
   //Here, we need a session. It's EXTREMELY important !
   router.get('/myEvents/:id', function(req, res){
