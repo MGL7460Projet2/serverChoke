@@ -1,7 +1,6 @@
 
 // Dependencies
-var restful = require('node-restful');
-var mongoose = restful.mongoose;
+var mongoose = require('mongoose');
 
 // Schema
 var chokeSchema = new mongoose.Schema({
@@ -13,4 +12,4 @@ var chokeSchema = new mongoose.Schema({
 });
 
 // Return model
-module.exports = restful.model('Chokes', chokeSchema);
+module.exports = mongoose.model('Choke', chokeSchema);

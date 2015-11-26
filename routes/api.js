@@ -153,23 +153,23 @@ router.post('/events/', function(req, res){
   });
 
   /* ************ Choke sending ************** */
-  // router.get('/choke/:id/:userID/:eventID', function(req, res){
-  //   console.log("User "+req.params.userID+" just choked User "+req.params.id+" about Event "+req.params.eventID);
-  //   // Creation of a new User
-  //   var newChoke = new Choke();
-  //   newChoke.fbSender = req.params.userID;
-  //   newChoke.fbReceiver = req.params.id;
-  //   newChoke.event = req.params.eventID;
-  //   newChoke.answer = false;
-  //
-  //   console.log(newChoke);
-  //
-  //   newChoke.save(function(err){
-  //     if(err)
-  //       throw err;
-  //     return done(null, newChoke);
-  //   });
-  // });
+  router.get('/choke/:id/:userID/:eventID', function(req, res){
+    console.log("User "+req.params.userID+" just choked User "+req.params.id+" about Event "+req.params.eventID);
+    // Creation of a new User
+    var newChoke = new Choke();
+    newChoke.fbSender = req.params.userID;
+    newChoke.fbReceiver = req.params.id;
+    newChoke.event = req.params.eventID;
+    newChoke.answer = false;
+
+    console.log(newChoke);
+
+    newChoke.save(function(err){
+      if(err)
+        throw err;
+      return done(null, newChoke);
+    });
+  });
 
   /* *************** Choke responding ************** */
   router.get('/choke/respond/:chokeID:/:userID', function(req, res){
@@ -233,8 +233,6 @@ router.post('/events/', function(req, res){
       xhr.open('GET', encodeURI(uri));
       xhr.onload = function() {
           if (xhr.status === 200) {
-              console.log(JSON.parse(xhr.responseText));
-
               res.json(JSON.parse(xhr.responseText));
           }
           else {
