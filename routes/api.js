@@ -172,9 +172,37 @@ router.post('/events/', function(req, res){
     });
   });
 
+  /* *************** Choke fetching **************** */
+  router.get('/chokes/:id', function(req, res){
+    var chokes = [];
+    Choke.find({ 'fbReceiver': req.params.id }, function (err, docs) {
+      // docs is an array
+      console.log(docs);
+      Choke.find({'fbSender' : req.params.id},function(err, docs2){
+        //Push in Chokes the chokes the user received
+        for(i in docs){
+          chokes.push(docs[i]);
+        }
+        //Push in Chokes the chokes the user sent
+        for(i in docs2){
+          chokes.push(docs2[i]);
+        }
+      });
+    });
+    //Send the chokes
+    console.log(chokes);
+    res.send(chokes);
+  });
+
   /* *************** Choke responding ************** */
   router.get('/choke/respond/:chokeID:/:userID', function(req, res){
-    res.json({x : 1});
+    var choke = {};
+    Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
+      choke = doc;
+    });
+
+    console.log(choke);
+    res.send(choke);
   });
 
 /*  **************  Data handling for user  ************** */
