@@ -5,9 +5,11 @@ var mongoose = restful.mongoose;
 
 // Schema
 var chokeSchema = new mongoose.Schema({
-    name: String,
-    face: String,
-    lastText: String
+    fbSender: String,
+    fbReceiver: String,
+    event: String,
+    answered : Boolean,
+    response : Boolean
 });
 
 // Return model

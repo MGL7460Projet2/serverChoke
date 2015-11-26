@@ -155,6 +155,25 @@ router.post('/events/', function(req, res){
   /* ************ Choke sending ************** */
   router.get('/choke/:id/:userID/:eventID', function(req, res){
     console.log("User "+req.params.userID+" just choked User "+req.params.id+" about Event "+req.params.eventID);
+    // Creation of a new User
+    var newChoke = new Choke();
+    newChoke.fbSender = req.params.userID;
+    newChoke.fbReceiver = req.params.id;
+    newChoke.event = req.params.eventID;
+    newChoke.answer = false;
+
+    console.log(newChoke);
+
+    newChoke.save(function(err){
+      if(err)
+        throw err;
+      return done(null, newChoke);
+    });
+  });
+
+  /* *************** Choke responding ************** */
+  router.get('/choke/respond/:chokeID:/:userID', function(req, res){
+
   });
 
 /*  **************  Data handling for user  ************** */
@@ -201,9 +220,9 @@ router.post('/events/', function(req, res){
   });
 
   //Give all attendingUsers on the event corresponding to the ID in URL
-  router.get('/event/attending/:id', function(req, res){
-    var eventID = req.params.id;
-    var sessionID = "10206500617488421";
+  router.get('/event/attending/:eventID/:userID', function(req, res){
+    var eventID = req.params.eventID;
+    var sessionID = req.params.userID;
     User.findOne({'fbID': sessionID}, function(err, user){
       console.log(user.token);
       var uri = "https://graph.facebook.com/"+eventID+"/attending?access_token="+user.token;
