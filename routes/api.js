@@ -11,13 +11,13 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var cors = require('cors');
 
 // Models
-var Events = require('../models/event');
-var Chokes = require('../models/choke');
+var Event = require('../models/event');
+var Choke = require('../models/choke');
 var User = require('../models/user');
 
 // Routes
-Events.methods(['get', 'put', 'post', 'delete']);
-Events.register(router, '/events');
+// Events.methods(['get', 'put', 'post', 'delete']);
+// Events.register(router, '/events');
 // Chokes.methods(['get', 'put', 'post', 'delete']);
 // Chokes.register(router, '/chokes');
 
