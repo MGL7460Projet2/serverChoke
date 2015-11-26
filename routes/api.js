@@ -233,6 +233,8 @@ router.post('/events/', function(req, res){
       xhr.open('GET', encodeURI(uri));
       xhr.onload = function() {
           if (xhr.status === 200) {
+              console.log(JSON.parse(xhr.responseText));
+
               res.json(JSON.parse(xhr.responseText));
           }
           else {
