@@ -18,8 +18,8 @@ var User = require('../models/user');
 // Routes
 Events.methods(['get', 'put', 'post', 'delete']);
 Events.register(router, '/events');
-Chokes.methods(['get', 'put', 'post', 'delete']);
-Chokes.register(router, '/chokes');
+// Chokes.methods(['get', 'put', 'post', 'delete']);
+// Chokes.register(router, '/chokes');
 
 //Cross origins for dynamic gets & posts middleware
 router.use(cors());
