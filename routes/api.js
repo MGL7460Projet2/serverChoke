@@ -213,7 +213,7 @@ router.post('/events/', function(req, res){
         }
       });
     });
-    res("didn't find anything");
+    res.send("didn't find anything");
   });
 
   router.get('/decline/:chokeID/:userID', function(req, res){
