@@ -205,6 +205,7 @@ router.post('/events/', function(req, res){
       choke = doc;
       console.log(choke);
       choke.response = true;
+      choke.answered = true;
       choke.save(function(err){
         if(err){
           throw err;
@@ -222,6 +223,7 @@ router.post('/events/', function(req, res){
       choke = doc;
       console.log(choke);
       choke.response = false;
+      choke.answered = true;
       choke.save(function(err){
         if(err){
           throw err;
