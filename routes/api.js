@@ -198,13 +198,31 @@ router.post('/events/', function(req, res){
   });
 
   /* *************** Choke responding ************** */
-  router.get('/choke/respond/:chokeID:/:userID', function(req, res){
+  router.get('/respond/choke/:chokeID:/:userID', function(req, res){
     var choke = {};
 
     Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
       choke = doc;
       console.log(choke);
       choke.response = true;
+      choke.save(function(err){
+        if(err){
+          throw err;
+        }else{
+          res.send(choke);
+        }
+      });
+    });
+
+  });
+
+  router.get('/decline/choke/:chokeID:/:userID', function(req, res){
+    var choke = {};
+
+    Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
+      choke = doc;
+      console.log(choke);
+      choke.response = false;
       choke.save(function(err){
         if(err){
           throw err;
