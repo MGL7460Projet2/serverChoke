@@ -198,14 +198,14 @@ router.post('/events/', function(req, res){
   });
 
   /* *************** Choke responding ************** */
-  router.get('/choke/respond/:chokeID:/:userID/:response', function(req, res){
+  router.get('/choke/respond/:chokeID:/:userID/yes', function(req, res){
     var choke = {};
-    if(req.params.response === "yes"){
-      var response = true;
-    }else{
-      var response = false;
-    }
-
+    // if(req.params.response === "yes"){
+    //   var response = true;
+    // }else{
+    //   var response = false;
+    // }
+    var response = true;
     Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
       choke = doc;
       console.log(choke);
@@ -218,7 +218,7 @@ router.post('/events/', function(req, res){
         }
       });
     });
-    
+
   });
 
 /*  **************  Data handling for user  ************** */
