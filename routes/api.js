@@ -153,9 +153,8 @@ router.post('/events/', function(req, res){
   });
 
   /* ************ Choke sending ************** */
-  router.get('/choke/:id/:userID', function(req, res){
-    console.log("User "+req.params.userID+" just choked User "+req.params.id);
-
+  router.get('/choke/:id/:userID/:eventID', function(req, res){
+    console.log("User "+req.params.userID+" just choked User "+req.params.id+" about Event "+req.params.eventID);
   });
 
 /*  **************  Data handling for user  ************** */
