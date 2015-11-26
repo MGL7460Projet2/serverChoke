@@ -198,7 +198,7 @@ router.post('/events/', function(req, res){
   });
 
   /* *************** Choke responding ************** */
-  router.get('/respond/:chokeID:/:userID', function(req, res){
+  router.get('/respond/:chokeID/:userID', function(req, res){
     var choke = {};
 
     Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
@@ -216,7 +216,7 @@ router.post('/events/', function(req, res){
     res("didn't find anything");
   });
 
-  router.get('/decline/:chokeID:/:userID', function(req, res){
+  router.get('/decline/:chokeID/:userID', function(req, res){
     var choke = {};
 
     Choke.findOne({'_id' : req.params.chokeID}, function(err, doc){
